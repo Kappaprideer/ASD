@@ -1,6 +1,4 @@
-from heapq import heapify
 import random
-from termios import NL1
 HOW_MANY=15
 HOW_MUCH=100
 
@@ -129,5 +127,7 @@ if __name__=="__main__":
     # Counting_sort(tab, HOW_MUCH+1)
     # Heap_sort(tab)
 
+
+    
     print(tab, "\n")
 
