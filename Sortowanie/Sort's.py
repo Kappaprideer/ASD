@@ -1,7 +1,8 @@
+from heapq import heapify
 import random
 from termios import NL1
 HOW_MANY=15
-HOW_MUCH=10
+HOW_MUCH=100
 
 def Insertion_sort(T):      #sortowanie przez wstawianie 
     n=len(T)
@@ -74,7 +75,7 @@ def Quick_sort(T, p, k):    #sortowanie Quicksortem
         Quick_sort(T,p, q-1)
         Quick_sort(T,q+1, k)
 
-def Counting_sort(T, k):
+def Counting_sort(T, k):    #sortowanie przez zliczanie
     n=len(T)
     A=[0 for _ in range(k)]
     B=[0 for _ in range(n)]
@@ -88,29 +89,45 @@ def Counting_sort(T, k):
     for i in range(n):
         T[i]=B[i]
 
+def Heapify(T,el,dl):
+    maximum=el
+    if (el*2)+1<=dl and T[(el*2)+1]>T[maximum]:
+        maximum=(el*2)+1
+    if (el*2)+2<=dl and T[(el*2)+2]>T[maximum]:
+        maximum=(el*2)+2
+    if maximum!=el:
+        T[maximum], T[el] = T[el], T[maximum]
+        Heapify(T,maximum,dl)
 
-        
+def Make_heap(T):
+    n=len(T)
+    for i in range(n//2, -1, -1):
+        Heapify(T,i,n-1)
+
+def Heap_sort(T):           #sortowanie kopcowe 
+    Make_heap(T)
+    n=len(T)
+    for i in range(n-1, -1, -1):
+        T[0], T[i] = T[i], T[0]
+        Heapify(T,0,i-1)
     
 
 
 
 
-            
-
-
 
 
 if __name__=="__main__":
-    tablica=[random.randint(0,HOW_MUCH) for _ in range(HOW_MANY)]
-    print("\n",tablica, "\n")
+    tab=[random.randint(0,HOW_MUCH) for _ in range(HOW_MANY)]
+    print("\n",tab, "\n")
+    n=len(tab)
+    # Insertion_sort(tab)
+    # Selection_sort(tab)
+    # Bubble_sort(tab)
+    # Merge_sort(tab, 0, n-1)
+    # Quick_sort(tab, 0, n-1)
+    # Counting_sort(tab, HOW_MUCH+1)
+    # Heap_sort(tab)
 
-    n=len(tablica)
-    #Insertion_sort(tablica)
-    #Selection_sort(tablica)
-    #Bubble_sort(tablica)
-    #Merge_sort(tablica, 0, n-1)
-    #Quick_sort(tablica, 0, n-1)
-    Counting_sort(tablica, HOW_MUCH+1)
-
-    print(tablica, "\n")
+    print(tab, "\n")
 
