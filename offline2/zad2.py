@@ -1,64 +1,63 @@
 from zad2testy import runtests
 
-def partition(tab, p, k, jak):
-    l=p
-    if jak==0:
-        for i in range(p,k):
-            if tab[i][0]<=tab[k][0]:
-                tab[i], tab[l] = tab[l], tab[i]
+def partition_poczatki(T, p, k):
+    l=p-1
+    for i in range(p,k):
+        if T[i][0]<=T[k][0]:
+            if T[i][0]==T[k][0]:
+                if T[i][1]>=T[k][1]:
+                    l+=1
+                    T[i],T[l]=T[l],T[i]
+            else:
                 l+=1
-    else:
-        for i in range(p,k):
-            if tab[i][1]<tab[k][1]:
-                tab[i], tab[l] = tab[l], tab[i]
-                l+=1
-            elif tab[i][1]==tab[k][1] and tab[i][0]<=tab[k][0]:
-                tab[i], tab[l] = tab[l], tab[i]
-                l+=1
-    tab[l], tab[k] = tab[k], tab[l]
-    return l
+                T[i],T[l]=T[l],T[i]
+    T[l+1], T[k] = T[k], T[l+1]
+    return l+1
 
+def quicksort_poczatki(T, p, k):
+    while p<k:
+        q=partition_poczatki(T, p, k)
+        quicksort_poczatki(T,p,q-1)
+        p=q+1
 
-def quicksort(tab,p,k, jak):
-    if p<k:
-        q=partition(tab, p, k, jak)
-        quicksort(tab, p, q-1, jak)
-        quicksort(tab, q+1, k, jak)
+def partition_konce(T,p,k):
+    l=p-1
+    for i in range(p,k):
+        if T[i][1]<=T[k][1]:
+            l+=1
+            T[i],T[l]=T[l],T[i]
+    T[l+1], T[k] = T[k], T[l+1]
+    return l+1
 
-def znajdz_koniec(L, wartosc,poczatek, p, k):
-    
-    while p<=k:
-        sr=(p+k)//2
-        if wartosc<L[sr][1]:
-            k=sr-1
-        elif wartosc>L[sr][1]:
-            p=sr+1
-        else:
-            srodek=sr
-            while(srodek<len(L) and L[srodek][1]==wartosc):
-                if L[srodek][0]==poczatek:
-                    return srodek
-                srodek+=1
-            srodek=sr
-            while srodek>=0 and L[srodek][1]==wartosc:
-                if L[srodek][0]==poczatek:
-                    return srodek
-                srodek-=1
-            
-    
-    
+def quicksort_konce(T, p, k):
+    while p<k:
+        q=partition_konce(T, p, k)
+        quicksort_konce(T, p, q-1)
+        p=q+1
+
 def depth(L):
-    quicksort(L, 0, len(L)-1, 0)
-    # koniec=[L[i] for i in range(len(L))]
-    # quicksort(koniec, 0, len(koniec)-1, 1)
-    # maks=0
-    # aktualnie=0
-    # for i in range(len(L)):
-    #     aktualnie=znajdz_koniec(koniec,L[i][1], L[i][0], 0, len(L)-1)
-    #     maks=max(maks, aktualnie-i+1)
-    # #print(L)
-    # #print(koniec)
-    # #print(maks)
-    # return maks
+    n=len(L)
+    konce=[L[i] for i in range(n)]
+    quicksort_poczatki(L, 0, n-1)
+    quicksort_konce(konce, 0, n-1)
+    print(L)
+    print(konce)
+    k=0
+    p=0
+    licz=0
+    wynik=0
+    while k<=p and k<n and p<n:
+        if p+1<n and konce[p+1][1] <= L[k][1]:
+            licz+=1
+            p+=1
+            wynik=max(wynik, licz)
+        else:
+            koniec=L[k][1]
+            while k<n and L[k][1] <= koniec:
+                licz-=1
+                k+=1
+    return wynik
+
+
 
 runtests( depth ) 
