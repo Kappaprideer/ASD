@@ -1,6 +1,7 @@
 import random
 from termios import NL1
-HOW_MANY=10
+HOW_MANY=15
+HOW_MUCH=10
 
 def Insertion_sort(T):      #sortowanie przez wstawianie 
     n=len(T)
@@ -67,12 +68,29 @@ def Partition(T, p, k):
     T[left], T[k] = T[k], T[left]
     return left
 
-def Quick_sort(T, p, k):
+def Quick_sort(T, p, k):    #sortowanie Quicksortem
     if p<k:
         q=Partition(T, p, k)
         Quick_sort(T,p, q-1)
         Quick_sort(T,q+1, k)
 
+def Counting_sort(T, k):
+    n=len(T)
+    A=[0 for _ in range(k)]
+    B=[0 for _ in range(n)]
+    for i in range(n):
+        A[T[i]]+=1
+    for i in range(1,k):
+        A[i]+=A[i-1]
+    for i in range(n-1, -1, -1):
+        B[A[T[i]]-1]=T[i]
+        A[T[i]]-=1
+    for i in range(n):
+        T[i]=B[i]
+
+
+        
+    
 
 
 
@@ -83,7 +101,7 @@ def Quick_sort(T, p, k):
 
 
 if __name__=="__main__":
-    tablica=[random.randint(0,150) for _ in range(HOW_MANY)]
+    tablica=[random.randint(0,HOW_MUCH) for _ in range(HOW_MANY)]
     print("\n",tablica, "\n")
 
     n=len(tablica)
@@ -91,7 +109,8 @@ if __name__=="__main__":
     #Selection_sort(tablica)
     #Bubble_sort(tablica)
     #Merge_sort(tablica, 0, n-1)
-    Quick_sort(tablica, 0, n-1)
+    #Quick_sort(tablica, 0, n-1)
+    Counting_sort(tablica, HOW_MUCH+1)
 
     print(tablica, "\n")
 
