@@ -1,4 +1,4 @@
-# Program dostaje wyrazy, nastepnie segreguje wyrazy do osobnych bucketow, jeden bucket to dlugosc wyrazu, nastepnie funkcja przechodzi
+d# Program dostaje wyrazy, nastepnie segreguje wyrazy do osobnych bucketow, jeden bucket to dlugosc wyrazu, nastepnie funkcja przechodzi
 # po bucketach posiadajacych wiecej niz jeden wyraz, w nich litery w wyrazie sa sortowane, lecz nie sa ponownie zapisane w postaci slow 
 # tylko wartosci z tablicy ascii, nastepnie wyrazy sa sortowane leksykograficznie za pomoca radix sort
 # czyli jesli wyrazy byly anagramami to wartosci w tablicach w poszczegolnych polach beda takie same, a dzieki sortowaniu 
