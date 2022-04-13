@@ -8,6 +8,6 @@ class Employee:
         self.g = -1
 
 def party(root):
-    return 0
+     
 
 runtests ( party )
