@@ -11,20 +11,6 @@ from zad4testy import runtests
 # moge dodac f(a-i, money)  
 
 
-# funkcja ktora wraca w danej kwocie po wszystkich budynkach po kolei od budynku o indeksie a do 0 sprawdzajac czy budynek zachodzi 
-
-
-def g(budynek,tablica):     # funkcja w ktorej budynek zawiera sie i sumuje reszte 
-    pass
-
-
-# napisać funkcje ktora tylko przyjmuje wartosci i szuka nawet nachodzacych na siebie
-
-def f(number_in_array, array, price):
-    pass
-
-
-
 def select_buildings(T,p):
     n=len(T)
     # tab - tablica zawierajaca krotki [(0_poczatek, 1_koniec, 2_ilosc_studentow, 3_koszt, 4_miejsce w normalnym ciagu )]
@@ -62,7 +48,7 @@ def select_buildings(T,p):
     
 
 
-
+    #naprawić tą funkcje aby działała dynamicznie patrzac na wcześniejsze elementy i dodając to co one zawierają
     indeksy=[[] for _ in range(n)]
     for i in range(n):
         for j in range(i,n):
@@ -75,7 +61,7 @@ def select_buildings(T,p):
 
     for x in range(n-1, -1, -1):
         lenght=len(indeksy[x])
-        if lenght>1:
+        if lenght>0:
             tab_for_f=[[0 for b in range(p+1)] for _ in range(lenght) ]
             for i in range(tab[indeksy[x][0]][3], p+1): 
                 tab_for_f[0][i]=tab[indeksy[x][0]][2]
@@ -94,11 +80,12 @@ def select_buildings(T,p):
     wynik=[tab[result[i]][4] for i in range(len(result))]
     print("\n MOJ WYNI: \n", maximum, "\n")
     print(indeksy)
+    print("\n", tab)
     return wynik
 
 runtests( select_buildings )
 
 # Tablice indeksów na których za każdym razem jak natrafiam na indeks który juz sprawdzałem jakie 
-# Rozwiązanie O(n^2 * n*p)
+# Rozwiązanie O(n^2 + n*p)
 
 
