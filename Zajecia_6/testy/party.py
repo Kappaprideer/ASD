@@ -26,7 +26,4 @@ def party(root):
     return root.f
 
 
-    
-     
-
 runtests ( party )
