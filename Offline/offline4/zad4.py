@@ -49,13 +49,14 @@ def select_buildings(T,p):
     
     maksymalnie=0
     odpowiedz=0
-    for j in range(n-1,-1,-1):
-        for i in range(p,-1,-1):
-            G[j][i]=g(j,i,G,buildings)
-            if G[j][i]>maksymalnie:
-                maksymalnie = G[j][i]
-                odpowiedz=j
 
+    for j in range(n-1,-1,-1):
+        G[j][p]=g(j,i,G,buildings)
+        if G[j][p]>maksymalnie:
+            maksymalnie = G[j][p]
+            odpowiedz=j
+    
+    
     result=[]
     ostatni=odpowiedz
     result.append(buildings[odpowiedz][4])
