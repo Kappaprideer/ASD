@@ -1,5 +1,4 @@
 time=0
-
 def dfs_visited(visited,parent, t_1, t_2, G, s):
     global time
     time+=1

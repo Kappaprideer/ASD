@@ -1,19 +1,7 @@
-# BFS - breadth-first-search
-# graf G jest reprezentowany w postaci macierzowej
-
 from queue import Queue
+# BFS - breadth-first-search
 
-def reading_graph(T):
-    n=0
-    for edge in T:
-        n=max(n, edge[0])
-        n=max(n, edge[1])
-    G=[[0 for i in range(n+1)] for j in range(n+1)]
-    for edge in T: 
-        G[edge[0]][edge[1]] = 1
-        G[edge[1]][edge[0]] = 1
-    return G
-
+# Przeszukanie Grafu w postaci macierzowej 
 def BFS(G):
     Q=Queue()
     n=len(G)
@@ -32,10 +20,41 @@ def BFS(G):
     
     for line in G:
         print(line)
-
     print("\n",lenght)
+# ------------------------------------------------
+# Przeszukiwanie grafu w postaci listowej 
+
+def BFS(G,s):
+    v=len(G)
+    Q=Queue()
+    visited=[0 for _ in range(v)]
+    parent=[ None for _ in range(v)]
+    lenght_from_s=[10 ** 10 for _ in range(v)]
+    Q.put(s)
+    lenght_from_s[s]=0
+    visited[s]=1
+
+    while not Q.empty():
+        s=Q.get()
+        for u in G[s]:
+            if visited[u]==0:
+                visited[u]=1
+                lenght_from_s[u]=lenght_from_s[s]+1
+                parent[u]=s
+                Q.put(u)
+# --------------------------------------------------------
 
 
+def reading_graph(T):
+    n=0
+    for edge in T:
+        n=max(n, edge[0])
+        n=max(n, edge[1])
+    G=[[0 for i in range(n+1)] for j in range(n+1)]
+    for edge in T: 
+        G[edge[0]][edge[1]] = 1
+        G[edge[1]][edge[0]] = 1
+    return G
 
 
 if __name__=="__main__":
