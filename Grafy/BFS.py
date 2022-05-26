@@ -1,5 +1,12 @@
 from queue import Queue
 # BFS - breadth-first-search
+# ----------------------------
+
+# Zastosowanie: 
+# - wykrywanie cykli 
+# - spójność grafu
+# - najkrótsza ścieżka w grafie bez wag
+# - dwudzielność 
 
 # Przeszukanie Grafu w postaci macierzowej 
 def BFS(G):

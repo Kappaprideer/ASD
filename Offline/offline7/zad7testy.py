@@ -21,7 +21,8 @@ def printsol( sol ):
     print("Otrzymany wynik : ", limit(sol) )
 
 def check( G, hint, sol ):
-  if hint==None : 
+  #if hint==None : 
+  if sol is None:
     return hint==sol
   else:
     if str(type(sol))!="<class 'list'>": return False

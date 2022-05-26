@@ -1,3 +1,13 @@
+# DFS - Depth first search 
+# Zastosowanie:
+# - spójność 
+# - dwudzielność 
+# - wykrywanie cykli 
+# - sortowanie topologiczne 
+# - cykl Eulera 
+# - mosty/ punkty artykulacji 
+# - silnie spójne składowe 
+
 time=0
 def dfs_visited(visited,parent, t_1, t_2, G, s):
     global time
