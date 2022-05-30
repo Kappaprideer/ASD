@@ -1,9 +1,10 @@
 # Andrzej Zaborniak
-# Program przechodzi przez 
+# Program tworzy wszystkie możliwe krawędzie w grafie razem z wagami, następnie sortuje krawędzie względem wag. 
+# Kolejna pętla przechodzi po wszystkich krawędziach w grafie startując w nich algorytm Kruskala, dodając krawędzie mające najmniejszą różnice 
+# względem punktu startowego. Na samym końcu zwraca najmniejszą różnicę w MTS.  
 
 
 from zad8testy import runtests
-import math
 
 class Node:
     def __init__(self, value):
@@ -28,6 +29,8 @@ def union(x,y):
         if x.rank==y.rank:
             y.rank+=1
 
+def sufit(x):
+    if x>
 
 def highway( A ):
     n=len(A)
@@ -35,13 +38,14 @@ def highway( A ):
 
     for i in range(n):
          for j in range(i+1,n):
-             G.append(( (math.ceil(math.sqrt((A[i][0]-A[j][0])**2 + (A[i][1]-A[j][1])**2))), i, j) )
+             G.append(( (sufit(((A[i][0]-A[j][0])**2 + (A[i][1]-A[j][1])**2)**(1/2))), i, j) )
 
     G.sort(key=lambda x: x[0])
     odp=10**10
     distance=[ None for _ in range(n)]
 
-    for s in range(len(G)):
+    for s in range(0, len(G)):
+    
         for i in range(n):
             distance[i]=Node(i)
 
@@ -50,12 +54,14 @@ def highway( A ):
         v=0
         left=s-1
         right=s+1
+        l=s
+        p=s
         union(distance[G[s][1]], distance[G[s][2]])
         najkrocej=min(najkrocej,G[s][0])
         najdluzej=max(najdluzej, G[s][0])
 
         while v<n-2:
-            if left>=0 and right<n:
+            if left>=0 and right<len(G):
                 if G[s][0]-G[left][0]<G[right][0]-G[s][0]:
                     e=left
                     left-=1
@@ -65,9 +71,10 @@ def highway( A ):
             elif left<0:
                 e=right
                 right+=1
-            elif right>=n:
+            elif right>=len(G):
                 e=left
                 left-=1
+
             if find(distance[G[e][1]]) != find(distance[G[e][2]]):
                 union(distance[G[e][1]], distance[G[e][2]])
                 najkrocej=min(najkrocej,G[e][0])
