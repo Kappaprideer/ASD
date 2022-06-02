@@ -1,6 +1,10 @@
 from zad9testy import runtests
 from collections import deque
 
+# Program tworzy nowy graf resuidalny reprezentowany w postaci macierzowej. Dla wszystkich możliwych dwóch ujść program osobno tworzy graf resuidalny z połączonymi
+# ujściami w jedno super ujśćie oraz uruchamia algorytm Endmondsa-Krapa. Na końcu porównuje wszystkie możliwe wyniki wybierając sumę dwóch ujść o największym przepływie.
+# Złożoność alogrytmu to O(V^3E^2) 
+
 def BFS(R,s):
     n=len(R)
     PQ=deque()
@@ -68,13 +72,7 @@ def maxflow( G,s ):
                 
 
     return odpowiedz
+   
 
-# if __name__=="__main__":
-    # # G=[(0,1,7),(0,3,3),(1,3,4),(1,4,6),(2,0,9),(2,3,7),(2,5,9),(3,4,9),(3,6,2),(5,3,3),(5,6,4),(6,4,8)]
-    # G = [(0, 1, 15), (1, 2, 2), (1, 3, 15), (1, 4, 3), (0, 2, 7), (0, 4, 6)]
-    # s=0
-    # print(maxflow(G,s))
-    
-    
 # zmien all_tests na True zeby uruchomic wszystkie testy
 runtests( maxflow, all_tests = True )
