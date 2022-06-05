@@ -35,15 +35,13 @@ def maxflow(G,s):
         n=max(n,u[0])
         n=max(n,u[1])
     n+=2
-    capacity=[ [ 0 for _ in range(n)] for i in range(n)]
     C=[[ 0 for _ in range(n)] for i in range(n)]
     graph=[[] for _ in range(n)]
 
     for u in G:
         graph[u[0]].append(u[1])
         graph[u[1]].append(u[0])
-        capacity[u[0]][u[1]]=u[2]
-    C=capacity.copy()
+        C[u[0]][u[1]]=u[2]
 
     for x in range(n):
         for y in range(x+1,n):
