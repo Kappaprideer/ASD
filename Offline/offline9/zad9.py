@@ -1,99 +1,86 @@
+# Andrzej Zaborniak
 from zad9testy import runtests
 from collections import deque
 
-# Program tworzy nowy graf resuidalny reprezentowany w postaci macierzowej. Dla wszystkich możliwych dwóch ujść program osobno tworzy graf resuidalny z połączonymi
-# ujściami w jedno super ujśćie oraz uruchamia algorytm Endmondsa-Krapa. Na końcu porównuje wszystkie możliwe wyniki wybierając sumę dwóch ujść o największym przepływie.
 # Złożoność alogrytmu to O(V^3E^2) 
 
-def BFS(graph,R,s,parent):
-    n=len(R)
-    PQ=deque()
-    visited = [ 0 for _ in range(n)]
+def BFS(graph,F,C,s):     #graf jako lista sąsiedztwa, flow, capacity, start
+    n=len(F)
+    visited=[ 0 for _ in range(n)]
+    minimum=[ 10**10 for _ in range(n)]
+    P=[ None for _ in range(n)]
+    q=deque()
+    q.append(s)
     visited[s]=1
-    PQ.append(s)
-    while len(PQ)>0:
-        s=PQ.popleft()
-        for u in range(n):
-            if R[s][u][0]>0 and visited[u]==0:
-                parent[u]=s
+
+    while len(q)>0:
+        s=q.popleft()
+        for u in graph[s]:
+            if visited[u]==0 and C[s][u]-F[s][u]>0:
                 visited[u]=1
-                PQ.append(u)
-                if u==n-1:
-                    return True, parent
-    return False, parent
-
-
-def maxflow( G,s ):
-    v=0
-    for u in G:
-        v=max(v,u[1])
-        v=max(v,u[0])
-    v+=2
-    odpowiedz=0
-    parent=[ None for _ in range(v)]
-    graph =[ [] for _ in range(v)]
-    for u in G:
-        graph[u[0]].append((u[1],u[2]))
-        # graph[u[1]].append((u[0],0))    
-
-    HI =[ [[0,0] for _ in range(v)] for i in range(v) ]
-    for u in G:
-        HI[u[0]][u[1]]=[u[2],1]
+                P[u]=s
+                minimum[u]=min(minimum[s],C[s][u]-F[s][u])
+                q.append(u)
+                if u ==len(F)-1:
+                    return P, minimum[u]
     
-    E = [0 for _ in range(v)] 
+    return None, minimum[len(F)-1]
+    
 
-    for x in range(v-1):
-        for y in range(x+1,v-1):
+
+def maxflow(G,s):
+    n=0
+    odpowiedz=0
+    for u in G:
+        n=max(n,u[0])
+        n=max(n,u[1])
+    n+=2
+    capacity=[ [ 0 for _ in range(n)] for i in range(n)]
+    C=[[ 0 for _ in range(n)] for i in range(n)]
+    graph=[[] for _ in range(n)]
+
+    for u in G:
+        graph[u[0]].append(u[1])
+        graph[u[1]].append(u[0])
+        capacity[u[0]][u[1]]=u[2]
+    C=capacity.copy()
+
+    for x in range(n):
+        for y in range(x+1,n):
             if x!=s and y!=s:
-                sum_x=0
-                sum_y=0
-                R=HI.copy()
-                for u in graph[x]:
-                    R[x][u[0]][0]=0
-                    sum_x+=u[1]
-                    # R[u[0]][x][0]=0
-                for u in graph[y]:
-                    R[y][u[0]][0]=0
-                    sum_y+=u[1]
-                    # R[u[0]][y][0]=0
 
-                R[x][v-1][0]=sum_x
-                R[y][v-1][0]=sum_y
-
-                # E = [0 for _ in range(v)]                       # Tablica wartosci przeplywu w krawedziach 
-                exist, parent = BFS(graph,R,s,parent)
-                city=parent[v-1]
-                value=10**10
-                while exist:
-
-                    while city!=s:
-                        value=min(value,R[parent[city]][city][0])
-                        city=parent[city]
-                    
-                    city=parent[v-1]
-                    while city!=s:
-                        if R[parent[city]][city][1]==1:
-                            E[city]+=value
-                        else:
-                            E[city]-=value
-                        R[parent[city]][city][0]-=value
-                        R[city][parent[city]][0]+=value 
-                        city=parent[city]
-
-                    exist, parent=BFS(graph,R,s,parent)
-                    city=parent[v-1]
-                    value=10**10
-
-                odpowiedz=max(odpowiedz,E[x]+E[y])
+                F=[ [ 0 for _ in range(n)] for i in range(n)]
+                C[x][n-1]=10**10
+                C[y][n-1]=10**10
+                graph[x].append(n-1)
+                graph[n-1].append(x)
+                graph[y].append(n-1)
+                graph[n-1].append(y)
                 
-                for u in graph[x]:
-                    R[x][u[0]][0]=u[1]
-                for u in graph[y]:
-                    R[y][u[0]][0]=u[1]
-                R[x][v-1][0]=0
-                R[y][v-1][0]=0
-                R[v-1][x][0]=0
-                R[v-1][y][0]=0
+                P, minimum=BFS(graph,F,C,s)
+                while P!=None:
+                    u=n-1
+                    while u!=s:
+                        F[P[u]][u]+=minimum
+                        F[u][P[u]]-=minimum
+                        u=P[u]
+                    P, minimum=BFS(graph,F,C,s)
+
+
+                C[x][n-1]=0
+                C[y][n-1]=0
+                graph[x].pop()
+                graph[y].pop()
+                graph[n-1].pop()
+                graph[n-1].pop()
+
+                suma=0
+                for i in range(n):
+                    suma+=F[s][i]
+                # print(suma)
+                odpowiedz=max(odpowiedz,suma)
+                
+
 
     return odpowiedz
    
