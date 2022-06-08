@@ -3,6 +3,10 @@ from zad9testy import runtests
 from collections import deque
 
 # Złożoność alogrytmu to O(V^3E^2) 
+# Program tworzy graf reprezentowany listą sąsiedztwa, oraz dwie dwuwymiarowe tablice: F - flow oraz C- Capacity które przetrzymują odpowiednio informacje:
+# o danym przepływie w krawędzi [u][v] oraz maksymalnym przepływie w [u][v].
+# Następnie dwie zagnieżdżone pętle odwzorowywują wybieranie wszystkich możliwych par ujść dodając sztucznie jedno super ujście o nieograniczonej
+# przepustowości. Na tak stworzonym grafie używam metody Edmonca Karpa oraz porównuje otrzymany wynik ze wszystkimi poprzednimi wybierając największy.
 
 def BFS(graph,F,C,s):     #graf jako lista sąsiedztwa, flow, capacity, start
     n=len(F)
@@ -75,10 +79,7 @@ def maxflow(G,s):
                 suma=0
                 for i in range(n):
                     suma+=F[s][i]
-                # print(suma)
                 odpowiedz=max(odpowiedz,suma)
-                
-
 
     return odpowiedz
    
