@@ -74,4 +74,31 @@ def succ(root, x):
 # |||||||||||||||||||
 # W każdym wierzchołku drzewa trzymamy za razem informacje ile elementów znajduje się po lewej a ile po prawej stronie drzewa. 
 # Jeśli i jest mniejsze od liczby elementów po lewej to idziemy w lewo, jeżeli i jest większe od ilośći elementóœ po lewej stronie idziemy w prawo
-# odejmując (lewastrona+1). 
+# odejmując (lewastrona+1).
+
+# Implementacja wsyzkuiwania i-tego elementu
+
+class Node:
+    def __init__(self,val):
+        self.val=val
+        self.hml=0
+        # hml - how many left 
+        self.hmr=0
+        # hmr - how many right 
+        self.parent = None
+        self.right = None
+        self.left = None
+
+
+def val(root, ind):
+    u = root
+    while ind>1:
+        ind -= u.hml +1
+        u = u.right
+    else:
+        u = u.left
+    return u
+
+# ------------------------------------------
+# funkcja sum(T,x,y) funkcja zwraca sumę liczb z przedziału [x,y] w drzewie BST - T
+# W każdym wierzchołku przechowujemy sumę swojego poddrzewa.
