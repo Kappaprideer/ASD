@@ -1,4 +1,5 @@
 from collections import deque
+from queue import PriorityQueue
 
 def MST(G):
     n=len(G)
@@ -9,10 +10,10 @@ def MST(G):
     d[0]=0
     visited[0]=1
     Q.append(0)
-    while len(Q)>0:
+    while len(Q):
         s=Q.popleft()
         for u in G[s]:
-            if visited[u[0]]==1 and d[u[0]]>u[1]:
+            if visited[u[0]]==1 and d[u[0]]>u[1] and u[0]!=parent[s]:
                 d[u[0]]=u[1]
                 parent[u[0]]=s
             if visited[u[0]]==0:
@@ -35,8 +36,10 @@ if __name__=="__main__":
     ]
 
     path=MST(G)
-    for i in range(len(path)):
-        print(i, path[i])
+    print("Krawedzie minimanego drzewa rozpinajacego:")
+    for i in range(1,len(path)):
+        print(i,"<-->", path[i],end=" | ")
+    print()
 
 
 

@@ -1,27 +1,28 @@
 from collections import deque
+from queue import PriorityQueue
 
 
 def Dijkstra(G,s,t):
-    Q=deque()
+    Q=PriorityQueue()
     n=len(G)
     visited=[ 0 for _ in range(n)]
     d= [ 10**10 for _ in range(n)]
     parent=[ None for _ in range(n)]
-    Q.append(s)
+    Q.put(s)
     d[s]=0
     visited[s]=1
-    while len(Q)>0:
-        s=Q.popleft()
+    while not Q.empty():
+        s=Q.get()
         for u in G[s]:
             if visited[u[0]]==1 and d[u[0]]>d[s]+u[1]:
                 d[u[0]]=d[s]+u[1]
                 parent[u[0]]=s
-                Q.append(u[0])
+                Q.put(u[0])
             elif visited[u[0]]==0:
                 visited[u[0]]=1
                 parent[u[0]]=s
                 d[u[0]]=d[s]+u[1]
-                Q.append(u[0])
+                Q.put(u[0])
     koniec=t
     print("Ścieżka:",end=" ")
     while koniec!=None:
