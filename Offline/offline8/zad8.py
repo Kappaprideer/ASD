@@ -30,7 +30,10 @@ def union(x,y):
             y.rank+=1
 
 def sufit(x):
-    if x>
+    x*=(-1)
+    x=int(x)
+    x*=(-1)
+    return x
 
 def highway( A ):
     n=len(A)
