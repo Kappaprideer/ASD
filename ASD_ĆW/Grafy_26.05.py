@@ -3,6 +3,8 @@ import queue
 # Reprezentacja grafu [[(2,5), (4,6)]]
 
 # DIJKSTRA 
+def w(u,v):
+    return None
 
 def relax(u,v,d,parent, PQ):
     if d[v] > d[u] + w(u,v):
