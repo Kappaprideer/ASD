@@ -42,10 +42,7 @@ def groupamount(G,s,t):
     for u in G:
         graph[u[0]].append((u[1],u[2]))
         graph[u[1]].append((u[0],u[2]))
-        
-    for line in graph:
-        print(line)
-
+    
     print(Dijksta_with_wild_argument(graph,s,t))
 
 if __name__=="__main__":

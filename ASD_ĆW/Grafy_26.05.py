@@ -16,7 +16,7 @@ def dijkstra(G,s):
     v=len(G)
     d = [ float('inf') for _ in range(v)]
     parent = [ None for _ in range(v)]
-    d[s] = 0 
+    d[s] = 0    
     PQ = queue.PriorityQueue()
     PQ.put((d[s],s))
     while not PQ.empty():
