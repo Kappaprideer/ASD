@@ -25,11 +25,25 @@ from kol1btesty import runtests
 #         for i in range(len(tablica)-1, -1, -1):
 #             for j in range(n-1):
 
+def radix_sort(tablica):
+    n=len(tablica[0])
+    odp=[ [] for _ in range(len(tablica))]
+    for key in range(n-1,-1,-1):
+        A=[0 for _ in range(27)]
+        for i in range(len(tablica)):
+            A[tablica[i][key]]+=1
+        for i in range(1,27):
+            A[i]+=A[i-1]
+        for i in range(len(tablica)-1,-1,-1):
+            odp[A[tablica[i][key]]-1]=tablica[i]
+            A[tablica[i][key]]-=1
+        tablica=odp
+    return odp
 
 
 def sortowanie_wyrazow(tablica):
     result=[]
-    wynik=[ 0 for _ in range(len(tablica[0]))]
+    # wynik=[ 0 for _ in range(len(tablica[0]))]
     for wyraz in tablica:
 
         alfabet=[0 for i in range(27)]
@@ -41,6 +55,7 @@ def sortowanie_wyrazow(tablica):
             alfabet[i]+=alfabet[i-1]
 
         
+        wynik=[ 0 for _ in range(len(tablica[0]))]
         for i in range(len(wyraz)-1, -1, -1):
             wynik[alfabet[ord(wyraz[i])-ord('a')]-1]=ord(wyraz[i])-ord('a')            
             alfabet[ord(wyraz[i])-ord('a')]-=1
@@ -49,7 +64,7 @@ def sortowanie_wyrazow(tablica):
     tmp=0
     count=0
     inny=False
-    #result=radix_sort(result)
+    result=radix_sort(result)
     for i in range(1, len(result)):
         inny=False
         for j in range(len(result[i])):

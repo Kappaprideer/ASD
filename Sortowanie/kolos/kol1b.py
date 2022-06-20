@@ -9,14 +9,14 @@
 # przechodze po kazdym elemencie dwukrotnie badajac czy sa takie same. Finalnie alogrytm zajmuje czas O(n) 
 # Nie zdążyłem napisać radix sort
 from kol1btesty import runtests
-
+from copy import deepcopy
 
 def radix_sort(tablica):
     n=len(tablica[0])
+    answer=[[] for _ in range(len(tablica))]
     for key in range(n-1,-1,-1):
 
         liczby=[ 0 for _ in range(27)]
-        answer=[[] for _ in range(len(tablica))]
 
         for i in range(len(tablica)):
             liczby[tablica[i][key]]+=1
@@ -27,8 +27,11 @@ def radix_sort(tablica):
         for i in range(len(tablica)-1, -1, -1):
             answer[liczby[tablica[i][key]]-1]=tablica[i]
             liczby[tablica[i][key]]-=1
-    return answer
+        tablica=deepcopy(answer)
 
+    # for line in answer:
+    #     print(line)
+    return answer
 
 
 def sortowanie_wyrazow(tablica):
