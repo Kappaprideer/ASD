@@ -16,12 +16,27 @@ def DFS(G):
     sorted_graph=[]
     for u in range(V):
         if visited[u]==0:
+            visited[u]=1
             DFS_visited(G,visited, u, sorted_graph)
     
     sorted_graph=sorted_graph[::-1]
     return sorted_graph
 
 if __name__=='__main__':
-    graph=[[1,2,5],[2,4],[],[],[3,6],[4],[]]
+    graph=[
+    [3],
+    [3],
+    [0,1],
+    [6,7],
+    [0,3,5],
+    [9,10],
+    [8],
+    [8,9],
+    [11],
+    [8,12],
+    [9],
+    [],
+    []
+        ]
     sorted_graph=DFS(graph)
     print(sorted_graph)

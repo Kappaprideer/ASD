@@ -27,10 +27,7 @@ def radix_sort(tablica):
         for i in range(len(tablica)-1, -1, -1):
             answer[liczby[tablica[i][key]]-1]=tablica[i]
             liczby[tablica[i][key]]-=1
-        tablica=deepcopy(answer)
 
-    # for line in answer:
-    #     print(line)
     return answer
 
 
