@@ -1,8 +1,21 @@
 from zad3testy import runtests
 
+def przedzial(A, count, left, right, path):
 
+  
+
+
+
+
+  return
+  
+  
 def kintersect( A, k ):
-  """Miejsce na Twoją implementację"""
-  return list(range(k))
+  pass
+
+
+
+
+  return 
 
 runtests( kintersect )
