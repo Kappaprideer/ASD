@@ -1,17 +1,17 @@
 from zad3testy import runtests
 
-def przedzial(A, count, left, right, path):
-
+def przedzial(A,i, count, left, right, path):
+  if count==0 or path[i]!=-1:
+    return
   
 
-
-
+  
 
   return
   
-  
 def kintersect( A, k ):
-  pass
+  odp=[-1 for _ in range(len(A))]
+  
 
 
 
