@@ -47,7 +47,7 @@ def highway( A ):
     odp=10**10
     distance=[ None for _ in range(n)]
 
-    for s in range(0, len(G)):
+    for s in range(len(G)):
     
         for i in range(n):
             distance[i]=Node(i)
