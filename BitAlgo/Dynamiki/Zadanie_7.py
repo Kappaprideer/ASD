@@ -1,4 +1,3 @@
-
 def game(T):
     tab=[[ number for number in T] for i in range(len(T))]
     for i in range(len(T)-2,-1,-1):

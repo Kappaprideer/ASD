@@ -1,4 +1,3 @@
-# Andrzej Zaborniak
 # Złożoność obliczeniowa to O(V+E+t^2) gdzie t jest równe długości najkrótszej ścieżki w grafie (V,E)
 # Program przeszukuje graf w szerz startując w wierzchołlku s, następnie dla każdego odwiedzonego wierzchołka zapisuje w nim rodzica z którego przyszedł
 # oraz długosć jaką musiał pokonać. Wyjątkiem jest wierzchołek t w którym zapisuje się wszystkich rodziców z których mozna dojść do wierzchołka t pokonując

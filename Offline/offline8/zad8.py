@@ -1,4 +1,3 @@
-# Andrzej Zaborniak
 # Program tworzy wszystkie możliwe krawędzie w grafie razem z wagami, następnie sortuje krawędzie względem wag. 
 # Kolejna pętla przechodzi po wszystkich krawędziach w grafie startując w nich algorytm Kruskala, dodając krawędzie mające najmniejszą różnice 
 # względem punktu startowego. Na samym końcu zwraca najmniejszą różnicę w MTS.  

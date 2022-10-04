@@ -1,4 +1,3 @@
-# Andrzej Zaborniak
 from zad9testy import runtests
 from collections import deque
 

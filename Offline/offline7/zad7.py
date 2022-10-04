@@ -1,4 +1,3 @@
-# Andrzej Zaborniak
 # Program uruchamia DFS ktory przechodzi po kolei wierzchołki sprawdzając za każdym razem czy przyszedł od bramy północej czy południowej, jeśli przyszedł z północej
 # to idzie dalej sprawdzając południowe bramy i analogicznie dla południowej. DFS rozpoczyna pracę zawsze od wierzchołka o numerze ,,0,, ponieważ jeśli ścieżka przechodzi
 # przez każde miasto to musi go również uwzględnić. Program kończy działanie jeśli DFS dojdzie do wierzchołka zero ponownie, przekraczając bramę z innej strony niż zaczynał

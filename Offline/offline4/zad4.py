@@ -1,5 +1,3 @@
-# Andrzej Zaborniak
-
 # buildings - tablica zawierajaca 5-cio elementowe tablice [ (0_poczatek, 1_koniec, 2_ilosc_studentow, 3_koszt, 4_miejsce w tablicy T )]
 # posortowana względem początków przedziałów, a w przypadku identycznych początków, posortowana po końcach przedziałów
 
